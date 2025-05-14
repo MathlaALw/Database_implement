@@ -81,7 +81,7 @@ Course_Name VARCHAR(50) NOT NULL ,
 create table Exam (
 Exam_Code int NOT NULL PRIMARY KEY identity(1,1),
 Room VARCHAR(20) NOT NULL ,
-E_Date Date  NOT NULL,
+E_Date DATE  NOT NULL,
 E_Time Time  NOT NULL,
 
 
@@ -144,4 +144,109 @@ add Department_ID int NOT NULL foreign key (Department_ID) references Department
 
 alter table Exam
 add Department_ID int NOT NULL foreign key (Department_ID) references Department(Department_ID)
+
+-- modify the data type of date column in exam table
+ALTER TABLE Exam
+ADD E_Date DATE;
+-- DELETE DEPARTMENT COLUMN IN FACULTY TABLE
+ALTER TABLE Faculty DROP COLUMN Department;
+--- rename table name
+
+EXEC sp_rename 'FacultyMopile','FacultyMobile';
+
+---------------------------
+
+
+
+
+
+------------------------
+
+
+--------------------
+INSERT INTO Department (D_Name)
+VALUES ('IT'),
+		('HR'),
+		('BUSINESS'),
+		('ENGINEERING')
+
+SELECT * FROM Department;
+-----------------
+INSERT INTO Hostel (Hostel_Name,No_OF_Seats)
+VALUES ('ALNOOR',50),
+		('Green Leaf Hostel',120),
+		('Dormitory Den',70),
+		('GradHouse Hostel',30),
+		('Campus Corner Hostel',90);
+
+SELECT * FROM Hostel;
+---------------
+INSERT INTO Exam (Room, E_Date, E_Time, Department_ID)
+VALUES 
+(1, '2025-01-01', '08:30:00', 1),
+(2, '2025-10-21', '10:15:00', 2),
+(3, '2025-10-22', '12:50:00', 3),
+(4, '2025-10-24', '13:30:00', 4);
+		
+SELECT * FROM Exam;
+
+------
+
+SELECT * FROM Faculty;
+
+INSERT INTO Faculty (F_Name, Salary, Department_ID)
+VALUES 
+('Ahmed',800.40,1),
+('Salim',600,2),
+('Safa',400,3),
+('Ali',750.4,4);
+
+------
+
+SELECT * FROM FacultyMobile;
+
+INSERT INTO FacultyMobile (FID,Mobile_No)
+	VALUES 
+	(1,98765432),
+	(1,96325874),
+	(2,99887766),
+	(3,98745633),
+	(4,78495162)
+
+
+
+-------
+---FK Delete column---
+-- modify Student table delete course id column wich is Fk 
+ALTER TABLE Student DROP CONSTRAINT FK__Student__Course___534D60F1;
+ALTER TABLE Student DROP COLUMN Course_ID;
+---------------------------
+
+
+
+
+SELECT * FROM Student ;
+
+
+-- adding data in student table
+
+
+INSERT INTO Student (Fname, Lname,FID , Hostel_ID)
+VALUES ('Salim' , 'alwahaibi',1,1),
+		('Omar','Alwahaibi',1,2),
+		('Fatma','Alwahaibi',2,3),
+		('Sara','Alwahaibi',2,4)
+
+--- adding data in course table
+
+
+
+SELECT * FROM Course ;
+
+
+INSERT INTO Course (Duration, Course_Name,SID , Department_ID)
+VALUES 
+('08:30:00', 'Mathematics', 2, 3),
+('04:30:00', 'Physics', 3, 4),
+('05:30:00', 'Computer Science', 4, 1);
 
